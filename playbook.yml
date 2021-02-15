@@ -1,0 +1,23 @@
+- name: Ansible homework
+  hosts: all
+  become: true
+  remote_user: root
+
+  tasks:
+  - name: install apache2
+    apt: name=apache2 update_cache=yes state=latest
+    
+  - name: Install git
+    apt: name=git state=present update_cache=yes
+
+  handlers:
+  - name: Reload Apache
+    service:
+      name: apache2
+      state: reloaded
+
+  - name: Restart Apache
+    service:
+      name: apache2
+      state: restarted
+
